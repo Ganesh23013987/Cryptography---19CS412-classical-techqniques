@@ -402,7 +402,7 @@ int main() {
 ```
 
 ## OUTPUT:
-OUTPUT:
+
 <img width="500" alt="image" src="https://github.com/user-attachments/assets/4dafdf1f-2281-4983-a1fe-489663f0aa16" />
 
 ## RESULT:
@@ -493,7 +493,7 @@ int main() {
 ```
 
 ## OUTPUT:
-OUTPUT :
+
 <img width="500" alt="image" src="https://github.com/user-attachments/assets/aff903ac-a0a3-4fa4-8fdd-f52fe4a9f523" />
 
 ## RESULT:
