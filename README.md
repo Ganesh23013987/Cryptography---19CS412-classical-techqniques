@@ -83,7 +83,7 @@ int main() {
 ```
 
 ## OUTPUT:
-<img width="500" alt="image" src="https://github.com/user-attachments/assets/80f4a831-5469-4ee1-bc78-03677f920526" />
+![image](https://github.com/user-attachments/assets/0cd9432d-5325-472f-a367-ec636e1daba9)
 
 ## RESULT:
 The program is executed successfully
