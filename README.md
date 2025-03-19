@@ -553,7 +553,7 @@ int main() {
 ```
 ## OUTPUT:
 
-<img width="391" alt="image" src="https://github.com/user-attachments/assets/aa2863de-9da8-4bff-92ea-518cb0c100dd" />
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/aa2863de-9da8-4bff-92ea-518cb0c100dd" />
 
 
 ## RESULT:
