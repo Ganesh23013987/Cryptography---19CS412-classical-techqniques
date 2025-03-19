@@ -131,158 +131,132 @@ To decrypt, use the INVERSE (opposite) of the last 3 rules, and the 1st as-is (d
 ## PROGRAM:
 ```
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
-#define SIZE 30
+#include <ctype.h>
 
-// Function to convert the string to lowercase
-void toLowerCase(char plain[], int ps) {
-    for (int i = 0; i < ps; i++) {
-        if (plain[i] >= 'A' && plain[i] <= 'Z') {
-            plain[i] += 32;
+#define MX 5
+
+void playfair(char ch1, char ch2, char key[MX][MX]) {
+    int i, j, w, x, y, z;
+
+    for (i = 0; i < MX; i++) {
+        for (j = 0; j < MX; j++) {
+            if (ch1 == key[i][j]) {
+                w = i;
+                x = j;
+            } 
+            if (ch2 == key[i][j]) {
+                y = i;
+                z = j;
+            }
         }
+    }
+
+    if (w == y) { 
+        x = (x + 1) % 5;
+        z = (z + 1) % 5;
+    } else if (x == z) { 
+        w = (w + 1) % 5;
+        y = (y + 1) % 5;
+    } else { 
+        int temp = x;
+        x = z;
+        z = temp;
+    }
+
+    printf("%c%c", key[w][x], key[y][z]); // Print directly
+}
+
+void remove_duplicates(char *str) {
+    int hash[26] = {0}, i, j = 0;
+    for (i = 0; str[i]; i++) {
+        if (!hash[str[i] - 'A']) {
+            str[j++] = str[i];
+            hash[str[i] - 'A'] = 1;
+        }
+    }
+    str[j] = '\0';
+}
+
+void prepare_input(char *str) {
+    int i, j = 0;
+    for (i = 0; str[i]; i++) {
+        if (isalpha(str[i])) {
+            str[j++] = toupper(str[i] == 'J' ? 'I' : str[i]);
+        }
+    }
+    str[j] = '\0';
+}
+
+void generate_key_matrix(char key[MX][MX], char *keystr) {
+    char alphabet[26] = "ABCDEFGHIKLMNOPQRSTUVWXYZ";  
+    char temp[26] = {0};
+    int i, j, k = 0;
+
+    strcpy(temp, keystr);
+    remove_duplicates(temp);
+
+    for (i = 0; i < 26; i++) {
+        if (!strchr(temp, alphabet[i])) {
+            temp[strlen(temp)] = alphabet[i];
+        }
+    }
+
+    k = 0;
+    for (i = 0; i < MX; i++) {
+        for (j = 0; j < MX; j++) {
+            key[i][j] = temp[k++];
+            printf("%c ", key[i][j]);
+        }
+        printf("\n");
     }
 }
 
-// Function to remove all spaces in a string
-int removeSpaces(char* plain, int ps) {
-    int i, count = 0;
-    for (i = 0; i < ps; i++) {
-        if (plain[i] != ' ') {
-            plain[count++] = plain[i];
-        }
-    }
-    plain[count] = '\0';
-    return count;
-}
-
-// Function to generate the 5x5 key square
-void generateKeyTable(char key[], int ks, char keyT[5][5]) {
-    int i, j, k;
-    int dicty[26] = {0};
-
-    // Mark 'j' as used
-    dicty['j' - 'a'] = 1;
-
-    i = 0;
-    j = 0;
-    
-    for (k = 0; k < ks; k++) {
-        if (dicty[key[k] - 'a'] == 0) {
-            dicty[key[k] - 'a'] = 1;
-            keyT[i][j] = key[k];
-            j++;
-            if (j == 5) {
+void encrypt(char *str, char key[MX][MX]) {
+    printf("\nCipher Text: ");
+    int i;
+    for (i = 0; str[i]; i++) {
+        if (str[i + 1] == '\0') 
+            playfair(str[i], 'X', key);
+        else {
+            if (str[i] == str[i + 1]) {
+                playfair(str[i], 'X', key);
+            } else {
+                playfair(str[i], str[i + 1], key);
                 i++;
-                j = 0;
             }
         }
     }
-
-    for (k = 0; k < 26; k++) {
-        if (dicty[k] == 0) {
-            keyT[i][j] = (char)(k + 'a');
-            if (keyT[i][j] == 'j') continue; // Skip 'j'
-            j++;
-            if (j == 5) {
-                i++;
-                j = 0;
-            }
-        }
-    }
-}
-
-// Function to search for characters in the key square
-void search(char keyT[5][5], char a, char b, int arr[]) {
-    int i, j;
-    if (a == 'j') a = 'i';
-    if (b == 'j') b = 'i';
-
-    for (i = 0; i < 5; i++) {
-        for (j = 0; j < 5; j++) {
-            if (keyT[i][j] == a) {
-                arr[0] = i;
-                arr[1] = j;
-            }
-            if (keyT[i][j] == b) {
-                arr[2] = i;
-                arr[3] = j;
-            }
-        }
-    }
-}
-
-// Function to find the modulus with 5
-int mod5(int a) {
-    return (a % 5);
-}
-
-// Function to make the plain text length even
-int prepare(char str[], int ptrs) {
-    if (ptrs % 2 != 0) {
-        str[ptrs++] = 'z';
-        str[ptrs] = '\0';
-    }
-    return ptrs;
-}
-
-// Function for performing the encryption
-void encrypt(char str[], char keyT[5][5], int ps) {
-    int i, a[4];
-    for (i = 0; i < ps; i += 2) {
-        search(keyT, str[i], str[i + 1], a);
-        if (a[0] == a[2]) {  // Same row
-            str[i] = keyT[a[0]][mod5(a[1] + 1)];
-            str[i + 1] = keyT[a[0]][mod5(a[3] + 1)];
-        } else if (a[1] == a[3]) {  // Same column
-            str[i] = keyT[mod5(a[0] + 1)][a[1]];
-            str[i + 1] = keyT[mod5(a[2] + 1)][a[1]];
-        } else {  // Rectangle rule
-            str[i] = keyT[a[0]][a[3]];
-            str[i + 1] = keyT[a[2]][a[1]];
-        }
-    }
-}
-
-// Function to encrypt using Playfair Cipher
-void encryptByPlayfairCipher(char str[], char key[]) {
-    char keyT[5][5];
-    int ks = strlen(key);
-    ks = removeSpaces(key, ks);
-    toLowerCase(key, ks);
-
-    int ps = strlen(str);
-    toLowerCase(str, ps);
-    ps = removeSpaces(str, ps);
-    ps = prepare(str, ps);
-
-    generateKeyTable(key, ks, keyT);
-    encrypt(str, keyT, ps);
+    printf("\n");
 }
 
 int main() {
-    char str[SIZE], key[SIZE];
+    char key[MX][MX], keystr[20], str[100];
 
-    // Key to be encrypted
-    strcpy(key, "Monarchy");
-    printf("Key text: %s\n", key);
+    printf("Enter key: ");
+    fgets(keystr, sizeof(keystr), stdin);
+    keystr[strcspn(keystr, "\n")] = '\0'; 
 
-    // Plaintext to be encrypted
-    strcpy(str, "instruments");
-    printf("Plain text: %s\n", str);
+    printf("Enter the plain text: ");
+    fgets(str, sizeof(str), stdin);
+    str[strcspn(str, "\n")] = '\0';
 
-    // Encrypt using Playfair Cipher
-    encryptByPlayfairCipher(str, key);
-    printf("Cipher text: %s\n", str);
+    prepare_input(keystr);
+    prepare_input(str);
+
+    generate_key_matrix(key, keystr);
+    
+    printf("\nEntered text: %s", str);
+    encrypt(str, key);
 
     return 0;
 }
-
 ```
 
 ## OUTPUT:
+![image](https://github.com/user-attachments/assets/4b4b4ab7-1b75-4d1f-bf35-b3708682f19e)
 
-<img width="500" alt="image" src="https://github.com/user-attachments/assets/3926a6f2-db7e-4a34-8c96-b6686cadf6cb" />
+
 
 
 ## RESULT:
