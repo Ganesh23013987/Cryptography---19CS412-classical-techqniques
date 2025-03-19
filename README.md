@@ -1,11 +1,10 @@
 
 # Cryptography---19CS412-classical-techqniques
+# Name : GANESH D
+# RegNo: 212223240035
 
 # Caeser Cipher
 Caeser Cipher using with different key values
-
-## Name : GANESH D
-## RegNo: 212223240035
 
 
 # AIM:
@@ -93,11 +92,13 @@ The program is executed successfully
 
 ---------------------------------
 
+# Cryptography---19CS412-classical-techqniques
+# Name : GANESH D
+# RegNo: 212223240035
+
 # PlayFair Cipher
 Playfair Cipher using with different key values
 
-## Name : GANESH D
-## RegNo: 212223240035
 
 # AIM:
 
