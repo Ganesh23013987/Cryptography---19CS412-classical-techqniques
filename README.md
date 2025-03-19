@@ -92,6 +92,8 @@ The program is executed successfully
 
 # PlayFair Cipher
 Playfair Cipher using with different key values
+## Name: GANESH D
+## RegNo: 212223240035
 
 # AIM:
 
