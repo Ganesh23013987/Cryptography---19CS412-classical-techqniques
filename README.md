@@ -370,6 +370,9 @@ The program is executed successfully
 # Vigenere Cipher
 Vigenere Cipher using with different key values
 
+## Name : GANESH D
+## RegNo: 212223240035
+
 # AIM:
 
 To develop a simple C program to implement Vigenere Cipher.
@@ -397,61 +400,73 @@ The Vigenere cipher is a method of encrypting alphabetic text by using a series 
 ```
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
 
-// Function to perform Vigenère encryption
-void vigenereEncrypt(char *text, const char *key) {
-    int textLen = strlen(text);
-    int keyLen = strlen(key);
+#define MAX_LENGTH 100
 
-    for (int i = 0; i < textLen; i++) {
-        char c = text[i];
-        if (c >= 'A' && c <= 'Z') {
-            // Encrypt uppercase letters
-            text[i] = ((c - 'A' + key[i % keyLen] - 'A') % 26) + 'A';
-        } else if (c >= 'a' && c <= 'z') {
-            // Encrypt lowercase letters
-            text[i] = ((c - 'a' + key[i % keyLen] - 'A') % 26) + 'a';
+int main() 
+{
+    char input[MAX_LENGTH];
+    char key[MAX_LENGTH];
+    char result[MAX_LENGTH];
+
+    printf("Enter the text to encrypt: ");
+    fgets(input, MAX_LENGTH, stdin);
+    input[strcspn(input, "\n")] = '\0'; 
+
+    printf("Enter the key: ");
+    fgets(key, MAX_LENGTH, stdin);
+    key[strcspn(key, "\n")] = '\0'; 
+
+    int inputLength = strlen(input);
+    int keyLength = strlen(key);
+
+    for (int i = 0, j = 0; i < inputLength; ++i) 
+    {
+        char currentChar = input[i];
+
+        if (isalpha(currentChar))
+        {
+            int shift = toupper(key[j % keyLength]) - 'A';
+            int base = isupper(currentChar) ? 'A' : 'a';
+
+            result[i] = ((currentChar - base + shift + 26) % 26) + base;
+            ++j;
+        }
+        else
+        {
+            result[i] = currentChar;
         }
     }
-}
 
-// Function to perform Vigenère decryption
-void vigenereDecrypt(char *text, const char *key) {
-    int textLen = strlen(text);
-    int keyLen = strlen(key);
+    result[inputLength] = '\0';
+    printf("Encrypted text: %s\n", result);
 
-    for (int i = 0; i < textLen; i++) {
-        char c = text[i];
-        if (c >= 'A' && c <= 'Z') {
-            // Decrypt uppercase letters
-            text[i] = ((c - 'A' - (key[i % keyLen] - 'A') + 26) % 26) + 'A';
-        } else if (c >= 'a' && c <= 'z') {
-            // Decrypt lowercase letters
-            text[i] = ((c - 'a' - (key[i % keyLen] - 'A') + 26) % 26) + 'a';
+    for (int i = 0, j = 0; i < inputLength; ++i) 
+    {
+        char currentChar = result[i];
+
+        if (isalpha(currentChar)) 
+        {
+            int shift = toupper(key[j % keyLength]) - 'A';
+            int base = isupper(currentChar) ? 'A' : 'a';
+
+            result[i] = ((currentChar - base - shift + 26) % 26) + base;
+            ++j;
         }
     }
-}
 
-int main() {
-    const char *key = "KEY"; // Replace with your desired key
-    char message[] = "This is a secret message."; // Replace with your message
-
-    // Encrypt the message
-    vigenereEncrypt(message, key);
-    printf("Encrypted Message: %s\n", message);
-
-    // Decrypt the message back to the original
-    vigenereDecrypt(message, key);
-    printf("Decrypted Message: %s\n", message);
+    result[inputLength] = '\0';
+    printf("Decrypted text: %s\n", result);
 
     return 0;
 }
-
 ```
 
 ## OUTPUT:
 
-<img width="500" alt="image" src="https://github.com/user-attachments/assets/aff903ac-a0a3-4fa4-8fdd-f52fe4a9f523" />
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/4e2ed205-ecfd-44d7-bc82-ec7141900c58" />
+
 
 ## RESULT:
 The program is executed successfully
