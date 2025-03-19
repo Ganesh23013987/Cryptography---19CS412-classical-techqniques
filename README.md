@@ -275,6 +275,9 @@ The program is executed successfully
 # Hill Cipher
 Hill Cipher using with different key values
 
+## Name : GANESH D
+## RegNo: 212223240035
+
 # AIM:
 
 To develop a simple C program to implement Hill Cipher.
@@ -358,8 +361,6 @@ int main() {
 
 ## OUTPUT:
 <img width="500" alt="image" src="https://github.com/user-attachments/assets/d1bd57a3-cef5-41d2-a75c-733803557fe9" />
-
-<img width="500" alt="image" src="https://github.com/user-attachments/assets/4dafdf1f-2281-4983-a1fe-489663f0aa16" />
 
 ## RESULT:
 The program is executed successfully
