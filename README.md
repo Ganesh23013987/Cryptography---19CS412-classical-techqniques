@@ -4,6 +4,9 @@
 # Caeser Cipher
 Caeser Cipher using with different key values
 
+### Name : GANESH D
+### RegNo: 212223240035
+
 # AIM:
 
 To encrypt and decrypt the given message by using Ceaser Cipher encryption algorithm.
@@ -32,10 +35,6 @@ Implementation using C or pyhton code
 
 
 ## PROGRAM:
-
-### Name : GANESH D
-
-### RegNo: 212223240035
 
 ```
 #include <stdio.h>
@@ -96,6 +95,9 @@ The program is executed successfully
 # PlayFair Cipher
 Playfair Cipher using with different key values
 
+### Name : GANESH D
+### RegNo: 212223240035
+
 # AIM:
 
 To implement a program to encrypt a plain text and decrypt a cipher text using play fair Cipher substitution technique.
@@ -131,8 +133,6 @@ To decrypt, use the INVERSE (opposite) of the last 3 rules, and the 1st as-is (d
 
 
 ## PROGRAM:
-### Name : GANESH D
-### RegNo: 212223240035
 
 ```
 #include <stdio.h>
