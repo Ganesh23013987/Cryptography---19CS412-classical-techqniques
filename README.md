@@ -476,6 +476,9 @@ The program is executed successfully
 # Rail Fence Cipher
 Rail Fence Cipher using with different key values
 
+## Name : GANESH D
+## RegNo: 212223240035
+
 # AIM:
 
 To develop a simple C program to implement Rail Fence Cipher.
@@ -501,67 +504,57 @@ In the rail fence cipher, the plaintext is written downwards and diagonally on s
 ```
 #include <stdio.h>
 #include <string.h>
-#include <stdlib.h>
 
 int main() {
-    int i, j, len, rails, count;
-    int code[100][1000];
-    char str[1000];
+    int i, j, k, l;
+    char a[20], c[20], d[20];
 
-    printf("Enter a Secret Message: ");
-    fgets(str, sizeof(str), stdin);
-    str[strcspn(str, "\n")] = '\0'; // Remove newline character
+    printf("\n\t\t RAIL FENCE TECHNIQUE");
+    printf("\n\nEnter the input string : ");
+    fgets(a, sizeof(a), stdin);
+    a[strcspn(a, "\n")] = '\0';  // Remove newline
 
-    len = strlen(str);
+    l = strlen(a);
 
-    printf("Enter number of rails: ");
-    scanf("%d", &rails);
-
-    // Initialize the code matrix with 0
-    for (i = 0; i < rails; i++) {
-        for (j = 0; j < len; j++) {
-            code[i][j] = 0;
-        }
+    // Encryption
+    for (i = 0, j = 0; i < l; i++) {
+        if (i % 2 == 0)
+            c[j++] = a[i];
     }
-
-    count = 0;
-    j = 0;
-
-    while (j < len) {
-        if (count % 2 == 0) {
-            // Fill downwards
-            for (i = 0; i < rails && j < len; i++) {
-                code[i][j] = (int)str[j];
-                j++;
-            }
-        } else {
-            // Fill upwards
-            for (i = rails - 2; i > 0 && j < len; i--) {
-                code[i][j] = (int)str[j];
-                j++;
-            }
-        }
-        count++;
+    for (i = 0; i < l; i++) {
+        if (i % 2 == 1)
+            c[j++] = a[i];
     }
+    c[j] = '\0';
 
-    // Print encoded message
-    printf("\nEncoded Message: ");
-    for (i = 0; i < rails; i++) {
-        for (j = 0; j < len; j++) {
-            if (code[i][j] != 0) {
-                printf("%c", code[i][j]);
-            }
-        }
+    printf("\nCipher text after applying rail fence: %s", c);
+
+    // Decryption
+    if (l % 2 == 0)
+        k = l / 2;
+    else
+        k = (l / 2) + 1;
+
+    for (i = 0, j = 0; i < k; i++) {
+        d[j] = c[i];
+        j += 2;
     }
+    for (i = k, j = 1; i < l; i++) {
+        d[j] = c[i];
+        j += 2;
+    }
+    d[l] = '\0';
 
-    printf("\n");
+    printf("\nText after decryption: %s\n", d);
+
     return 0;
 }
 
 ```
 ## OUTPUT:
 
-<img width="500" alt="image" src="https://github.com/user-attachments/assets/e5b62535-98e3-43a4-a37b-7ab250cffd09" />
+<img width="391" alt="image" src="https://github.com/user-attachments/assets/aa2863de-9da8-4bff-92ea-518cb0c100dd" />
+
 
 ## RESULT:
 The program is executed successfully
