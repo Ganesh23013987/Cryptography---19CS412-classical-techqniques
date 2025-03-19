@@ -1,7 +1,5 @@
 
 # Cryptography---19CS412-classical-techqniques
-## Name : GANESH D
-## RegNo: 212223240035
 
 # Caeser Cipher
 Caeser Cipher using with different key values
@@ -34,6 +32,9 @@ Implementation using C or pyhton code
 
 
 ## PROGRAM:
+### Name : GANESH D
+### RegNo: 212223240035
+
 ```
 #include <stdio.h>
 #include <stdlib.h>
@@ -92,8 +93,6 @@ The program is executed successfully
 
 # PlayFair Cipher
 Playfair Cipher using with different key values
-## Name: GANESH D
-## RegNo: 212223240035
 
 # AIM:
 
@@ -130,6 +129,9 @@ To decrypt, use the INVERSE (opposite) of the last 3 rules, and the 1st as-is (d
 
 
 ## PROGRAM:
+### Name : GANESH D
+### RegNo: 212223240035
+
 ```
 #include <stdio.h>
 #include <string.h>
