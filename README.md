@@ -360,7 +360,7 @@ int main() {
 ```
 
 ## OUTPUT:
-<img width="500" alt="image" src="https://github.com/user-attachments/assets/d1bd57a3-cef5-41d2-a75c-733803557fe9" />
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/d1bd57a3-cef5-41d2-a75c-733803557fe9" />
 
 ## RESULT:
 The program is executed successfully
