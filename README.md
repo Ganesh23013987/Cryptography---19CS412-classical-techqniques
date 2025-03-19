@@ -32,9 +32,10 @@ Implementation using C or pyhton code
 
 
 ## PROGRAM:
-### Name : GANESH D
-### RegNo: 212223240035
 
+### Name : GANESH D
+
+### RegNo: 212223240035
 
 ```
 #include <stdio.h>
